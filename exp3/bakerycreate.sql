@@ -14,7 +14,7 @@ create table products(
 pid varchar2(20) constraint pro_pk primary key, 
 flavor varchar2(20),
 food varchar2(20),
-price decimal(3,2) constraint p_chk check(price>0)
+price decimal(5,2) constraint p_chk check(price>0)
 );
 
 create table receipts(
