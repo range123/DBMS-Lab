@@ -28,6 +28,7 @@ modify(rec_date constraint rec_check not null);
 describe orders;
 
 rem 11.A customer may cancel an order or ordered part(s) may not be available in a stock. Hence on removing the details of the order, ensure that all the corresponding details are also deleted.
+rem Before delete.
 select * from orders;
 select * from order_details;
 alter table order_details
@@ -38,5 +39,6 @@ add constraint order_fk foreign key(order_no) references orders(order_no) on del
 add constraint part_fk foreign key(part_no) references parts(part_no) on delete cascade;
 delete from orders
 where order_no='O1';
+rem After delete
 select * from orders;
 select * from order_details;
