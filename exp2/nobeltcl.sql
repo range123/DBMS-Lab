@@ -3,7 +3,7 @@ savepoint intermed;
 
 rem 12.Insert a new tuple into the nobel relation.
 insert into nobel
-values(140,'Clement Smith','m','Phy','Quantum Mechanics',2000,'SSN University','12-apr-2000','India');
+values(140,'Vinod','m','Phy','Quantum Computing',2000,'SSN University','27-apr-2003','India');
 
 rem 13.Update the aff_role of literature laureates as 'Linguists'.
 rem before update
