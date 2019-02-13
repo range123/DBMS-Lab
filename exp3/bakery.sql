@@ -24,6 +24,7 @@ insert into customers values(17, 'MESDAQ', 'CHARLENE');
 insert into customers values(18, 'DOMKOWSKI', 'ALMETA');
 insert into customers values(19, 'STENZ', 'NATACHA');
 insert into customers values(20, 'ZEME', 'STEPHEN');
+insert into customers values(21, 'JOHN', 'DAVID');
 
 REM --------------------------------------------------------------------------
 REM PRODUCTS (product number,  Flavor, Food, Price)
