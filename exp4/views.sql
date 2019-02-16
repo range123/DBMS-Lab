@@ -12,26 +12,26 @@ savepoint blue;
 
 insert into Blue_Flavor values('02-AB-Z-12','Cake',9.15);
 insert into products values('blue123','Blueberry','Muffin',22);
-select * 
-from products 
+select *
+from products
 where pid ='02-AB-Z-12';
 
 update Blue_Flavor
 set price = price+100
 where pid ='90-BLU-11';
-select * 
-from products 
+select *
+from products
 where pid ='90-BLU-11';
 
 delete from Blue_Flavor
 where pid  = 'blue123';
-select * 
-from products 
+select *
+from products
 where pid ='blue123';
 
 rem check updatable
-select COLUMN_NAME,UPDATABLE 
-from USER_UPDATABLE_COLUMNS 
+select COLUMN_NAME,UPDATABLE
+from USER_UPDATABLE_COLUMNS
 where table_name = 'BLUE_FLAVOR';
 
 rollback to blue;
@@ -51,8 +51,8 @@ savepoint cheap;
 
 insert into Cheap_Food values('check123','Chocolate','Cake',0.15);
 
-select * 
-from products 
+select *
+from products
 where pid = 'check123';
 
 rem try to update price>1
@@ -60,8 +60,8 @@ update Cheap_Food
 set price = price + 5
 where pid = '70-W';
 
-select * 
-from products 
+select *
+from products
 where pid = '70-W';
 
 rem try to update price>1
@@ -69,8 +69,8 @@ update Cheap_Food
 set price = price + 0.05
 where pid = '70-W';
 
-select * 
-from products 
+select *
+from products
 where pid = '70-W';
 
 delete from Cheap_Food
@@ -80,9 +80,9 @@ select * from products
 where pid = 'check123';
 
 rem check updatable
-select COLUMN_NAME,UPDATABLE 
-from USER_UPDATABLE_COLUMNS 
-where table_name = 'CHEAP_FOOD'; 
+select COLUMN_NAME,UPDATABLE
+from USER_UPDATABLE_COLUMNS
+where table_name = 'CHEAP_FOOD';
 
 rollback to cheap;
 
@@ -90,7 +90,7 @@ rem 3. Create a view called Hot_Food that show the product id and its quantity w
 rem same product is ordered more than once in the same receipt.
 
 create or replace view Hot_Food as
-select i.item,count(i.item) as "quantity" 
+select i.item,count(i.item) as "quantity"
 from item_list i
 group by (i.rno,i.item)
 having count(i.item)>1;
@@ -106,8 +106,8 @@ delete from Hot_Food
 where item = 'test';
 
 rem check updatable
-select COLUMN_NAME,UPDATABLE 
-from USER_UPDATABLE_COLUMNS 
+select COLUMN_NAME,UPDATABLE
+from USER_UPDATABLE_COLUMNS
 where table_name = 'HOT_FOOD';
 
 rollback to hot;
@@ -117,7 +117,7 @@ rem 4. Create a view named Pie_Food that will display the details (customer lnam
 rem receipt number and date, ordinal) who had ordered the Pie food with receipt details.
 
 create or replace view Pie_Food as
-select c.last_name,p.flavor,r.rno,r.rdate,i.ordinal 
+select c.last_name,p.flavor,r.rno,r.rdate,i.ordinal
 from customers c
 join receipts r on(c.cid = r.cid)
 join item_list i on(i.rno = r.rno)
@@ -146,8 +146,8 @@ where item = '90-APIE-10';
 
 
 rem check updatable
-select COLUMN_NAME,UPDATABLE 
-from USER_UPDATABLE_COLUMNS 
+select COLUMN_NAME,UPDATABLE
+from USER_UPDATABLE_COLUMNS
 where table_name = 'PIE_FOOD';
 
 rollback to pie;
@@ -185,8 +185,8 @@ where pid = 'check123';
 
 
 rem check updatable
-select COLUMN_NAME,UPDATABLE 
-from USER_UPDATABLE_COLUMNS 
+select COLUMN_NAME,UPDATABLE
+from USER_UPDATABLE_COLUMNS
 where table_name = 'CHEAP_VIEW';
 
 rollback to cheapv;
@@ -211,7 +211,7 @@ insert into item_list values(12121,Ordinal_No_Seq.nextval,'70-TU');
 insert into item_list values(12121,Ordinal_No_Seq.nextval,'90-BLU-11');
 
 rem after insert
-select * 
+select *
 from item_list
 where rno = 12121;
 
