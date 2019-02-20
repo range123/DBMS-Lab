@@ -6,6 +6,7 @@ select pid,food,price
 from products
 where flavor = 'Blueberry';
 
+select * from Blue_Flavor;
 savepoint blue;
 
 
@@ -36,6 +37,8 @@ where table_name = 'BLUE_FLAVOR';
 
 rollback to blue;
 
+rem UPDATABLE
+
 rem 2. Create a view named Cheap_Food, which display the details (product id, flavor,
 rem food, price) of products with price lesser than $1. Ensure that, the price of these
 rem food(s) should never rise above $1 through view.
@@ -45,6 +48,8 @@ select pid,flavor,food,price
 from products
 where price<1
 with check option;
+
+select * from Cheap_Food;
 
 savepoint cheap;
 
@@ -84,6 +89,9 @@ select COLUMN_NAME,UPDATABLE
 from USER_UPDATABLE_COLUMNS
 where table_name = 'CHEAP_FOOD';
 
+
+rem UPDATABLE
+
 rollback to cheap;
 
 rem 3. Create a view called Hot_Food that show the product id and its quantity where the
@@ -95,6 +103,8 @@ from item_list i
 group by (i.rno,i.item)
 having count(i.item)>1;
 
+select * from Hot_Food;
+
 savepoint hot;
 
 insert into Hot_Food values('24-12-BC',12);
@@ -103,13 +113,15 @@ update Hot_Food
 set item = 'test';
 
 delete from Hot_Food
-where item = 'test';
+where item = '90-APP-11';
 
 rem check updatable
 select COLUMN_NAME,UPDATABLE
 from USER_UPDATABLE_COLUMNS
 where table_name = 'HOT_FOOD';
 
+
+rem NOT UPDATABLE
 rollback to hot;
 
 
@@ -124,6 +136,7 @@ join item_list i on(i.rno = r.rno)
 join products p on(p.pid = i.item)
 where p.food = 'Pie';
 
+select * from Pie_Food;
 savepoint pie;
 
 
@@ -144,11 +157,15 @@ where flavor = 'Apple';
 select * from item_list
 where item = '90-APIE-10';
 
+select count(*) from item_list;
 
 rem check updatable
 select COLUMN_NAME,UPDATABLE
 from USER_UPDATABLE_COLUMNS
 where table_name = 'PIE_FOOD';
+
+
+rem Only item_list is UPDATABLE(using ordinal)
 
 rollback to pie;
 
@@ -158,6 +175,7 @@ rem and food.
 create or replace view Cheap_View as
 select pid,flavor,food
 from Cheap_Food;
+select * from Cheap_View;
 
 insert into products values('check123','Chocolate','Cake',0.15);
 savepoint cheapv;
@@ -188,6 +206,9 @@ rem check updatable
 select COLUMN_NAME,UPDATABLE
 from USER_UPDATABLE_COLUMNS
 where table_name = 'CHEAP_VIEW';
+
+
+rem UPDATABLE
 
 rollback to cheapv;
 
@@ -246,6 +267,7 @@ where rno = 12121;
 select item
 from Product_details p
 where rno = 18129 and item = '70-TU' ;
+
 
 
 rem 8. Drop all the above created database objects.
