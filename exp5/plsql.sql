@@ -1,32 +1,37 @@
 rem 1. Check whether the given combination of food and flavor is available. If any one or
 rem both are not available, display the relevant message.
 declare
+  rows products%rowtype;
+  f1 products%
   cursor c1 is
   select * from products
   where food = '&food' and flavor = '&flavor';
-  rows products%rowtype;
+
+
 begin
   open c1;
   fetch c1 into rows;
   if c1%FOUND then
-    dbms_output.put_line('Found');
+    dbms_output.put_line('Both Found');
   elsif c1%NOTFOUND then
-    dbms_output.put_line('Not Found');
+    dbms_output.put_line('Both Not Found');
   END IF;
   close c1;
 END;
 /
 
-rem 2. On a given date, find the number of items sold (Use Implicit cursor).
+rem 2. On a given date, find the number of receipts sold (Use Implicit cursor).
 declare
-  counter number(2);
   buy_date varchar2(20);
 begin
   buy_date:='&date';
-  select count(*) into counter from receipts r
-  join item_list i on(i.rno = r.rno)
-  where r.rdate = buy_date;
-  dbms_output.put_line('Number of items sold on ' || to_char(buy_date) || ' = ' || to_char(counter));
+  update receipts
+  set rno = rno
+  where rdate = buy_date;
+
+  dbms_output.put_line('No. of receipts sold on ' || to_char(buy_date) || ' = ' ||to_char(SQL%rowcount));
+
+
 end;
 /
 
@@ -56,6 +61,7 @@ begin
   where price<dp;
 
   dbms_output.put_line('ProductID' ||'      '||'Food'||'      '||'Flavor'||'      '||'Price');
+  dbms_output.put_line('---------------------------------------------------------------------');
 
   open c1;
   fetch c1 into row1;
@@ -110,6 +116,7 @@ begin
 
   end if;
 
+  dbms_output.put_line('---------------------------------------------------------------------');
   dbms_output.put_line(to_char(counter) || ' product(s) found EQUAL/CLOSEST to given price');
 
 end;
@@ -150,6 +157,7 @@ begin
   close g_name;
 
   dbms_output.put_line('FOOD     FLAVOR     QTY');
+  dbms_output.put_line('------------------------');
   open c1;
   fetch c1 into food,flavor,qty;
   while c1%Found loop
@@ -158,6 +166,7 @@ begin
     fetch c1 into food,flavor,qty;
     end loop;
   close c1;
+  dbms_output.put_line('------------------------');
   dbms_output.put_line('Total Quantity = '|| to_char(counter));
 end;
 /
