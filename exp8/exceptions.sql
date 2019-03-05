@@ -22,3 +22,27 @@ exception
 end;
 /
 rem 121 17947 21040
+
+rem 2. While inserting the receipt details, raise an exception when the receipt date is greater
+rem than the current date.
+
+declare
+ curr_date date;
+ rows receipts%rowtype;
+ invalid_date_exception exception;
+begin
+  select sysdate into curr_date from dual;
+  rows.rno  := &rno;
+  rows.rdate := '&rdate';
+  rows.cid := &cid;
+  if rows.rdate>curr_date then
+    raise invalid_date_exception;
+  else
+    insert into receipts(rno,rdate,cid) values(rows.rno,rows.rdate,rows.cid);
+  end if;
+  exception
+    when invalid_date_exception then
+      dbms_output.put_line('The rdate is greater than the current date!');
+      return;
+end;
+/
