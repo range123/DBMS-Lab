@@ -1,22 +1,54 @@
 rem 1. Check whether the given combination of food and flavor is available. If any one or
 rem both are not available, display the relevant message.
 declare
+  fd products.food%type;
+  fl products.flavor%type;
   rows products%rowtype;
-  f1 products%
-  cursor c1 is
-  select * from products
-  where food = '&food' and flavor = '&flavor';
-
-
+  c1 number;
+  c2 number;
+  c3 number;
 begin
-  open c1;
-  fetch c1 into rows;
-  if c1%FOUND then
-    dbms_output.put_line('Both Found');
-  elsif c1%NOTFOUND then
-    dbms_output.put_line('Both Not Found');
-  END IF;
-  close c1;
+  fd := '&food';
+  fl :='&flavor';
+  begin
+    select pid into rows.pid from products
+    where food = fd and flavor = fl;
+    exception when no_data_found then
+    c1 := 0;
+  end;
+  if SQL%found then
+    c1 :=1;
+  end if;
+
+  begin
+    select distinct food into rows.food from products
+    where food = fd;
+    exception when no_data_found then
+    c2 := 0;
+  end;
+  if sql%found then
+  c2:=1;
+  end if;
+  begin
+    select distinct flavor into rows.flavor from products
+    where flavor = fl;
+    exception when no_data_found then
+    c3:=0;
+  end;
+  if sql%found then
+    c3 := 1;
+  end if;
+  if c1=1 then
+    dbms_output.put_line('Combination found');
+  elsif c2=1 and c3=1 then
+   dbms_output.put_line('Both food and flavor found');
+  elsif c2=1 then
+    dbms_output.put_line('Food found');
+  elsif c3=1 then
+    dbms_output.put_line('Flavor found');
+  else
+    dbms_output.put_line('Both not found');
+  end if;
 END;
 /
 
@@ -41,87 +73,29 @@ rem number, food type, flavor and price. Also print the number of items that is 
 rem closest to the desired price.
 
 declare
-  row1 products%rowtype;
-  flag number;
-  counter number;
-  dp decimal(5,2);
-  minprice decimal(5,2);
-  maxprice decimal(5,2);
-  cursor c1 is
-  select * from products
-  where price = dp;
-
+  ip_price products.price%type;
+  cursor c1 is select * from products
+  where abs(price-ip_price) =
+  (select min(abs(price-ip_price)) from products);
+  pro products%rowtype;
+  c integer;
 begin
-  dp := &price;
-  flag := 0;
-  counter:=0;
-  select min(price) into minprice from products
-  where price>dp;
-  select max(price) into maxprice from products
-  where price<dp;
-
+  ip_price := &input_price;
+	open c1;
+	c := 0;
   dbms_output.put_line('ProductID' ||'      '||'Food'||'      '||'Flavor'||'      '||'Price');
   dbms_output.put_line('---------------------------------------------------------------------');
-
-  open c1;
-  fetch c1 into row1;
-  while c1%found loop
-    counter:=counter+1;
-    flag:=1;
-    dbms_output.put_line(row1.pid ||'   '||row1.food ||'    '|| row1.flavor ||'   '|| row1.price);
-    fetch c1 into row1;
-  end loop;
-  close c1;
-
-  if flag=0 and abs(minprice-dp)<abs(maxprice-dp) then
-    dp := minprice;
-    open c1;
-    fetch c1 into row1;
-    while c1%found loop
-      counter:=counter+1;
-      dbms_output.put_line(row1.pid ||'   '||row1.food ||'    '|| row1.flavor ||'   '|| row1.price);
-      fetch c1 into row1;
-    end loop;
-    close c1;
-  elsif flag = 0 and abs(minprice-dp)>abs(maxprice-dp) then
-    dp := maxprice;
-    open c1;
-    fetch c1 into row1;
-    while c1%found loop
-      counter:=counter+1;
-      dbms_output.put_line(row1.pid ||'   '||row1.food ||'    '|| row1.flavor ||'   '|| row1.price);
-      fetch c1 into row1;
-    end loop;
-    close c1;
-  elsif flag = 0 and abs(minprice-dp) = abs(maxprice-dp) then
-    dp := maxprice;
-    open c1;
-    fetch c1 into row1;
-    while c1%found loop
-      counter:=counter+1;
-      dbms_output.put_line(row1.pid ||'   '||row1.food ||'    '|| row1.flavor ||'   '|| row1.price);
-      fetch c1 into row1;
-    end loop;
-    close c1;
-
-    dp := minprice;
-    open c1;
-    fetch c1 into row1;
-    while c1%found loop
-      counter:=counter+1;
-      dbms_output.put_line(row1.pid ||'   '||row1.food ||'    '|| row1.flavor ||'   '|| row1.price);
-      fetch c1 into row1;
-    end loop;
-    close c1;
-
-  end if;
-
+	loop
+		fetch c1
+		into pro.pid, pro.flavor, pro.food, pro.price;
+		exit when c1%notfound;
+		dbms_output.put_line(pro.pid||'      '||pro.flavor||'      '||pro.food||'      '||pro.price);
+		c := c+1;
+	end loop;
   dbms_output.put_line('---------------------------------------------------------------------');
-  dbms_output.put_line(to_char(counter) || ' product(s) found EQUAL/CLOSEST to given price');
-
+  dbms_output.put_line(to_char(c) || ' product(s) found EQUAL/CLOSEST to given price');
 end;
 /
-
 
 
 
