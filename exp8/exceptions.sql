@@ -6,15 +6,18 @@ rem predefined exception handling.
 declare
   rows item_list%rowtype;
   rnum receipts.rno%type;
+  one_row_exception exception;
 begin
   rnum :=&rno;
   select * into rows
   from item_list
   where rno = rnum;
   if SQL%rowcount =1 then
-    dbms_output.put_line('The given receipt '|| to_char(rnum)||' has exactly one item');
+    raise one_row_exception;
   end if;
 exception
+  when one_row_exception then
+    dbms_output.put_line('The given receipt '|| to_char(rnum)||' has exactly one item');
   when no_data_found then
     dbms_output.put_line('The given receipt '|| to_char(rnum)||' has no orders');
   when too_many_rows then
