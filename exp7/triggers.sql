@@ -101,7 +101,7 @@ end;
 /
 
 savepoint s;
-insert into receipts values(9999,'24-dec-1999',5);
+insert into receipts(rno,rdate,cid) values(9999,'24-dec-1999',5);
 insert into item_list values(9999,1,'26-8x10');
 insert into item_list values(9999,2,'26-8x10');
 insert into item_list values(9999,3,'90-APP-11');
@@ -132,7 +132,7 @@ end;
 /
 
 savepoint s1;
-insert into receipts values(9999,'24-dec-1999',5);
+insert into receipts(rno,rdate,cid) values(9999,'24-dec-1999',5);
 insert into item_list values(9999,1,'26-8x10');
 insert into item_list values(9999,2,'26-8x10');
 insert into item_list values(9999,3,'26-8x10');
