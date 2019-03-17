@@ -4,7 +4,7 @@ eid number(6) constraint eid_pk primary key,
 ename varchar2(30),
 dob date,
 sex char,
-designation varchar2(30),
+designation varchar2(100),
 basic number(10,2),
 da number(10,2),
 hra number(10,2),
@@ -14,7 +14,6 @@ gross number(10,2),
 tot_deduc number(10,2),
 netpay number(10,2)
 );
-insert into employee_payroll(eid,ename,dob,sex,designation,basic) values(11111,'PJK','13-aug-2000','M','Manager',20000);
 create or replace procedure cal_pay(eno employee_payroll.eid%type,bas in employee_payroll.basic%type)
 is
 rows employee_payroll%rowtype;

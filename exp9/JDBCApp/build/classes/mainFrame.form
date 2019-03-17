@@ -45,17 +45,15 @@
               <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="176" max="-2" attributes="0"/>
-              <Component id="jLabel7" min="-2" pref="382" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="exit" min="-2" pref="115" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="190" max="-2" attributes="0"/>
+                      <Component id="exit" min="-2" pref="115" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Component id="insert" min="-2" pref="115" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="update" min="-2" pref="115" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -63,7 +61,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="search" min="-2" pref="115" max="-2" attributes="0"/>
-                      <EmptySpace pref="31" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="delete" min="-2" pref="115" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
@@ -72,6 +70,33 @@
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace pref="30" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="gross" min="-2" pref="153" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="deductions" min="-2" pref="162" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="netpay" min="-2" pref="164" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="hra" min="-2" pref="143" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="da" min="-2" pref="144" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="pf" min="-2" pref="130" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="mc" min="-2" pref="126" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jLabel7" min="-2" pref="382" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
@@ -110,19 +135,32 @@
                   <Component id="jLabel6" min="-2" pref="43" max="-2" attributes="0"/>
                   <Component id="basic" min="-2" pref="35" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="34" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="insert" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                  <Component id="hra" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
+                  <Component id="da" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
+                  <Component id="pf" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
+                  <Component id="mc" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="gross" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
+                  <Component id="deductions" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
+                  <Component id="netpay" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="22" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="update" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                   <Component id="search" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                   <Component id="delete" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                  <Component id="insert" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="exit" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                   <Component id="clear" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -222,6 +260,43 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clearActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="pf">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="PF"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="hra">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="HRA"/>
+        <Property name="horizontalTextPosition" type="int" value="0"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="gross">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="GROSS"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="da">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="DA"/>
+        <Property name="horizontalTextPosition" type="int" value="0"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="deductions">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="DEDUCTIONS"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="netpay">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="NETPAY"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="mc">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="MC"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
